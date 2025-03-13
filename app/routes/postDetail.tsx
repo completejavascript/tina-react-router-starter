@@ -1,7 +1,7 @@
 import { Container, Paper, Stack, Title } from "@mantine/core";
 import { useLoaderData } from "react-router";
 import { client } from "tina/__generated__/client";
-import type { Post } from "tina/__generated__/types";
+import type { PostQuery } from "tina/__generated__/types";
 import { CustomTinaMarkdown } from "~/components/CustomTinaMarkdown";
 import type { Route } from "./+types/home";
 
@@ -15,17 +15,26 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export async function loader() {
-  const postData = await client.queries.post({
-    relativePath: "hello-world.md",
+export async function loader({ params }: Route.LoaderArgs) {
+  const { slug } = params;
+
+  const result = await client.queries.post({
+    relativePath: `${slug}.md`,
   });
 
-  return { post: postData.data.post };
+  return { ...result };
 }
 
-export default function HelloWorldRoute() {
-  const { post } = useLoaderData<{ post: Post }>();
-  const { title, body } = post;
+export default function BlogDetailRoute() {
+  const { data } = useLoaderData<{
+    data: PostQuery;
+    variables: {
+      relativePath: string;
+    };
+    query: string;
+  }>();
+
+  const { title, body } = data.post;
 
   return (
     <Container size="md" py="xl">

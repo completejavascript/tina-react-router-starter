@@ -39,7 +39,7 @@ export const Welcome: React.FC = () => {
                     href={href}
                     target="_blank"
                     rel="noreferrer"
-                    color={isDark ? "blue.5" : "blue.7"}
+                    c={isDark ? "blue.5" : "blue.7"}
                   >
                     {text}
                   </Anchor>
@@ -55,8 +55,8 @@ export const Welcome: React.FC = () => {
 
 const resources = [
   {
-    href: "https://reactrouter.com/docs",
-    text: "React Router Docs",
+    href: "/posts",
+    text: "Blog Posts",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
