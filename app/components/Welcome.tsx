@@ -8,10 +8,10 @@ import {
   Text,
 } from "@mantine/core";
 import { useColorScheme } from "@mantine/hooks";
-import logoDark from "./logo-dark.svg";
-import logoLight from "./logo-light.svg";
+import logoDark from "~/assets/logo-dark.svg";
+import logoLight from "~/assets/logo-light.svg";
 
-export function Welcome() {
+export const Welcome: React.FC = () => {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
 
@@ -51,7 +51,7 @@ export function Welcome() {
       </Stack>
     </Container>
   );
-}
+};
 
 const resources = [
   {
