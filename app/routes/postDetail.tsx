@@ -1,7 +1,7 @@
 import { Container, Paper, Stack, Title } from "@mantine/core";
 import { useLoaderData } from "react-router";
 import { client } from "tina/__generated__/client";
-import type { PostQuery } from "tina/__generated__/types";
+import { tinaField, useTina } from "tinacms/dist/react";
 import { CustomTinaMarkdown } from "~/components/CustomTinaMarkdown";
 import type { Route } from "./+types/home";
 
@@ -22,17 +22,21 @@ export async function loader({ params }: Route.LoaderArgs) {
     relativePath: `${slug}.md`,
   });
 
-  return { ...result };
+  return {
+    data: result.data,
+    variables: { ...result.variables },
+    query: result.query,
+  };
 }
 
 export default function BlogDetailRoute() {
-  const { data } = useLoaderData<{
-    data: PostQuery;
-    variables: {
-      relativePath: string;
-    };
-    query: string;
-  }>();
+  const loaderData = useLoaderData<typeof loader>();
+
+  const { data } = useTina({
+    query: loaderData.query,
+    variables: loaderData.variables,
+    data: loaderData.data,
+  });
 
   const { title, body } = data.post;
 
@@ -42,7 +46,10 @@ export default function BlogDetailRoute() {
         <Stack gap="md">
           <Title order={1}>{title}</Title>
 
-          <div className="tina-content">
+          <div
+            className="tina-content"
+            data-tina-field={tinaField(data, 'post')}
+          >
             <CustomTinaMarkdown content={body} />
           </div>
         </Stack>

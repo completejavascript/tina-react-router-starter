@@ -32,6 +32,11 @@ export default defineConfig({
         name: "post",
         label: "Posts",
         path: "content/posts",
+        ui: {
+          router: (props) => {
+            return `/posts/${props.document._sys.filename}`;
+          },
+        },
         fields: [
           {
             type: "string",
