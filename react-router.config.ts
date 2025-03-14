@@ -4,7 +4,8 @@ import { client } from "tina/__generated__/client";
 export default {
   // Config options...
   // Server-side render by default, to enable SPA mode set this to `false`
-  ssr: true,
+  ssr: false,
+  
   async prerender() {
     // Start with the static routes
     const routes = ["/", "/posts"];
