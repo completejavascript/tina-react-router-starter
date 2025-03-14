@@ -1,7 +1,7 @@
 import { reactRouter } from "@react-router/dev/vite";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import netlifyPlugin from "@netlify/vite-plugin-react-router";
+// import netlifyPlugin from "@netlify/vite-plugin-react-router";
 import pkg from "./package.json";
 
 export default defineConfig({
@@ -17,5 +17,9 @@ export default defineConfig({
       "tinacms/dist/rich-text",
     ],
   },
-  plugins: [reactRouter(), tsconfigPaths(), netlifyPlugin()],
+  plugins: [
+    reactRouter(), 
+    tsconfigPaths(), 
+    // netlifyPlugin()
+  ],
 });

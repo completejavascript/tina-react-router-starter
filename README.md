@@ -1,4 +1,6 @@
-This is a [Tina CMS](https://tina.io/) starter project.
+This is a [Tina CMS](https://tina.io/) starter project. 
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/11e3a8ad-3aa1-4e75-8ea6-94f84b404646/deploy-status)](https://app.netlify.com/sites/tina-rr7-starter/deploys)
 
 ## Setup
 
@@ -50,7 +52,17 @@ This project can easily be deployed using services like [Netlify](https://www.ne
 ### Build settings
 
 In general, the build settings will look like so:
-![image](https://user-images.githubusercontent.com/71273009/198213418-ea141090-8f7b-4092-8260-01af128b8ef9.png)
+
+```bash
+# Install command
+pnpm install
+
+# Build command
+pnpm run build
+
+# Output directory
+build/client
+```
 
 ### Environment variables
 
