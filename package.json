@@ -1,5 +1,5 @@
 {
-  "name": "tina-ssg-starter",
+  "name": "tina-react-router-starter",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/completejavascript/tina-ssg-starter.git"
+    "url": "git+https://github.com/completejavascript/tina-react-router-starter.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/completejavascript/tina-ssg-starter/issues"
+    "url": "https://github.com/completejavascript/tina-react-router-starter/issues"
   },
-  "homepage": "https://github.com/completejavascript/tina-ssg-starter#readme",
+  "homepage": "https://github.com/completejavascript/tina-react-router-starter#readme",
   "description": "",
   "dependencies": {
     "@mantine/core": "^7.17.1",
