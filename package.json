@@ -32,6 +32,7 @@
     "tinacms": "^2.7.2"
   },
   "devDependencies": {
+    "@netlify/vite-plugin-react-router": "^1.0.0",
     "@react-router/dev": "^7.3.0",
     "@react-router/serve": "^7.3.0",
     "@tinacms/cli": "^1.9.2",
