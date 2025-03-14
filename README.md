@@ -11,13 +11,13 @@ This is a [Tina CMS](https://tina.io/) starter project.
 
 Install the project's dependencies:
 
-```
+```bash
 pnpm install
 ```
 
 Run the project locally:
 
-```
+```bash
 pnpm dev
 ```
 
@@ -54,9 +54,6 @@ This project can easily be deployed using services like [Netlify](https://www.ne
 In general, the build settings will look like so:
 
 ```bash
-# Install command
-pnpm install
-
 # Build command
 pnpm run build
 
