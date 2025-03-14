@@ -8,6 +8,7 @@ import {
   Text,
 } from "@mantine/core";
 import { useColorScheme } from "@mantine/hooks";
+import { Link } from "react-router";
 import logoDark from "~/assets/logo-dark.svg";
 import logoLight from "~/assets/logo-light.svg";
 
@@ -35,14 +36,9 @@ export const Welcome: React.FC = () => {
             <List spacing="xs">
               {resources.map(({ href, text, icon }) => (
                 <List.Item key={href} icon={icon}>
-                  <Anchor
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    c={isDark ? "blue.5" : "blue.7"}
-                  >
-                    {text}
-                  </Anchor>
+                  <Link to={href}>
+                    <Text c={isDark ? "blue.5" : "blue.7"}>{text}</Text>
+                  </Link>
                 </List.Item>
               ))}
             </List>
