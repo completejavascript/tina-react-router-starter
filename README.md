@@ -87,3 +87,7 @@ Make sure to deploy the output of `pnpm run build`
 ## Styling
 
 This template comes with [Mantine](https://mantine.dev/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+
+## TODO
+
+- Update `CustomTinaMarkdown` custom components.

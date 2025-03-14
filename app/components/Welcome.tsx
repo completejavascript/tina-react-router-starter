@@ -36,9 +36,13 @@ export const Welcome: React.FC = () => {
             <List spacing="xs">
               {resources.map(({ href, text, icon }) => (
                 <List.Item key={href} icon={icon}>
-                  <Link to={href}>
-                    <Text c={isDark ? "blue.5" : "blue.7"}>{text}</Text>
-                  </Link>
+                  <Anchor
+                    to={href}
+                    component={Link}
+                    c={isDark ? "blue.5" : "blue.7"}
+                  >
+                    {text}
+                  </Anchor>
                 </List.Item>
               ))}
             </List>
