@@ -7,7 +7,7 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { Link, useLoaderData } from "react-router";
+import { Link, redirect, useLoaderData } from "react-router";
 import { client } from "tina/__generated__/client";
 import { getPostUrl, parseFilename } from "~/file-helper";
 import { LANGUAGE_CONFIG } from "~/language-config";
@@ -34,8 +34,15 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function loader({ params }: Route.LoaderArgs) {
-  const { language } = params;
+  const { language = LANGUAGE_CONFIG.DEFAULT_LANGUAGE } = params;
   const postsResponse = await client.queries.postConnection();
+
+  if (!LANGUAGE_CONFIG.SUPPORTED_LANGUAGES.includes(language)) {
+    redirect("/404", {
+      status: 404,
+    });
+    return { posts: {} };
+  }
 
   return {
     posts:
@@ -45,17 +52,14 @@ export async function loader({ params }: Route.LoaderArgs) {
 
           const filename = edge.node._sys.filename;
           const { language: _language } = parseFilename(filename);
-          return _language === (language || LANGUAGE_CONFIG.DEFAULT_LANGUAGE);
+          return _language === language;
         })
         ?.map((edge) => {
           const filename = edge?.node?._sys.filename ?? "";
           const { baseName, language } = parseFilename(filename);
 
           return {
-            slug: getPostUrl(
-              baseName,
-              language || LANGUAGE_CONFIG.DEFAULT_LANGUAGE
-            ),
+            slug: getPostUrl(baseName, language),
             title: edge?.node?.title || edge?.node?._sys.filename,
           };
         }) ?? [],
