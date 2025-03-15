@@ -11,8 +11,11 @@ import { useColorScheme } from "@mantine/hooks";
 import { Link } from "react-router";
 import logoDark from "~/assets/logo-dark.svg";
 import logoLight from "~/assets/logo-light.svg";
+import { getLanguagePath } from "~/language-config";
+import { useLanguage } from "./LanguageContext";
 
 export const Welcome: React.FC = () => {
+  const { language } = useLanguage();
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
 
@@ -37,7 +40,7 @@ export const Welcome: React.FC = () => {
               {resources.map(({ href, text, icon }) => (
                 <List.Item key={href} icon={icon}>
                   <Anchor
-                    to={href}
+                    to={getLanguagePath(href, language)}
                     component={Link}
                     c={isDark ? "blue.5" : "blue.7"}
                   >

@@ -4,6 +4,7 @@ import { client } from "tina/__generated__/client";
 import { tinaField, useTina } from "tinacms/dist/react";
 import { CustomTinaMarkdown } from "~/components/CustomTinaMarkdown";
 import type { Route } from "./+types/home";
+import { LANGUAGE_CONFIG } from "~/language-config";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -16,10 +17,10 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function loader({ params }: Route.LoaderArgs) {
-  const { slug } = params;
+  const { slug, language = LANGUAGE_CONFIG.DEFAULT_LANGUAGE } = params;
 
   const result = await client.queries.post({
-    relativePath: `${slug}.md`,
+    relativePath: `${slug}.${language}.md`,
   });
 
   return {
@@ -48,7 +49,7 @@ export default function BlogDetailRoute() {
 
           <div
             className="tina-content"
-            data-tina-field={tinaField(data, 'post')}
+            data-tina-field={tinaField(data, "post")}
           >
             <CustomTinaMarkdown content={body} />
           </div>

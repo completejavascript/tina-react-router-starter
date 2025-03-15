@@ -1,4 +1,7 @@
 import { defineConfig } from "tinacms";
+import { LANGUAGE_CONFIG } from "~/language-config";
+
+const { DEFAULT_LANGUAGE, SUFFIX_SEPARATOR } = LANGUAGE_CONFIG;
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -34,7 +37,24 @@ export default defineConfig({
         path: "content/posts",
         ui: {
           router: (props) => {
-            return `/posts/${props.document._sys.filename}`;
+            const filename = props.document._sys.filename;
+            const suffixPattern = new RegExp(`${SUFFIX_SEPARATOR}(\\w{2})$`);
+            const match = filename.match(suffixPattern);
+
+            // Extract language from file suffix
+            const lang = match ? match[1] : DEFAULT_LANGUAGE;
+
+            // Extract base name without language suffix
+            const baseName = match
+              ? filename.slice(0, -(SUFFIX_SEPARATOR.length + 2))
+              : filename;
+
+            // For default language, don't include the language prefix
+            if (lang === DEFAULT_LANGUAGE) {
+              return `/posts/${baseName}`;
+            }
+            
+            return `/${lang}/posts/${baseName}`;
           },
         },
         fields: [

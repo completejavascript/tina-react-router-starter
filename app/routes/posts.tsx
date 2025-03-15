@@ -1,14 +1,16 @@
 import {
-    Button,
-    Card,
-    Container,
-    Grid,
-    Stack,
-    Text,
-    Title
+  Button,
+  Card,
+  Container,
+  Grid,
+  Stack,
+  Text,
+  Title,
 } from "@mantine/core";
 import { Link, useLoaderData } from "react-router";
 import { client } from "tina/__generated__/client";
+import { getPostUrl, parseFilename } from "~/file-helper";
+import { LANGUAGE_CONFIG } from "~/language-config";
 import type { Route } from "./+types/home";
 
 interface Post {
@@ -31,16 +33,29 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export async function loader() {
+export async function loader({ params }: Route.LoaderArgs) {
+  const { language } = params;
   const postsResponse = await client.queries.postConnection();
 
   return {
     posts:
       postsResponse.data.postConnection.edges
-        ?.filter((edge) => Boolean(edge?.node))
+        ?.filter((edge) => {
+          if (!edge?.node) return false;
+
+          const filename = edge.node._sys.filename;
+          const { language: _language } = parseFilename(filename);
+          return _language === (language || LANGUAGE_CONFIG.DEFAULT_LANGUAGE);
+        })
         ?.map((edge) => {
+          const filename = edge?.node?._sys.filename ?? "";
+          const { baseName, language } = parseFilename(filename);
+
           return {
-            slug: edge?.node?._sys.filename,
+            slug: getPostUrl(
+              baseName,
+              language || LANGUAGE_CONFIG.DEFAULT_LANGUAGE
+            ),
             title: edge?.node?.title || edge?.node?._sys.filename,
           };
         }) ?? [],
@@ -67,7 +82,7 @@ export default function BlogsRoute() {
 
                   <Button
                     component={Link}
-                    to={`/posts/${post.slug}`}
+                    to={post.slug}
                     variant="light"
                     color="blue"
                     fullWidth
