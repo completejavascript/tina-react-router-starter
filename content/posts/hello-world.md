@@ -12,10 +12,11 @@ External Link: [google](https://google.com)
 
 Internal Link: [Blog Posts](/posts)
 
-
 External Image: ![](https://octodex.github.com/images/minion.png)
 
-Internal Image: ![](/image.png)
+Internal Image: 
+
+![](/assets/image.png)
 
 > blockqoute
 
@@ -39,16 +40,16 @@ function sum(a, b) {
 
 ## Tables
 
-| Option | Description |
-| ------ | ----------- |
+| Option | Description                                                               |
+| ------ | ------------------------------------------------------------------------- |
 | data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+| engine | engine to be used for processing templates. Handlebars is the default.    |
+| ext    | extension to be used for dest files.                                      |
 
 Right aligned columns
 
-| Option | Description |
-| ------:| -----------:|
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+| Option |                                                               Description |
+| -----: | ------------------------------------------------------------------------: |
+|   data | path to data files to supply the data that will be passed into templates. |
+| engine |    engine to be used for processing templates. Handlebars is the default. |
+|    ext |                                      extension to be used for dest files. |
